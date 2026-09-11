@@ -13,7 +13,7 @@ One page:
 - Last 7 days of daily-mean mix
 - Monthly mix for the seeded archive (2015–present)
 
-The site is static [Astro](https://astro.build) on Vercel. The browser only receives aggregated JSON (`public/data/latest.json`, `daily.json`, `monthly.json`), not the full hourly archive.
+The site is static [Astro](https://astro.build) on Vercel. Aggregates live in `data/` and are baked into the page at build time. The 1.3 MB daily series is **not** served to browsers.
 
 ## Local development
 
@@ -37,7 +37,7 @@ python scripts/update.py
 
 ## How updates work
 
-A GitHub Action runs at 15 minutes past each hour, fetches the newest PGCB pages, and commits the three JSON files **only if the newest timestamp changed**. Vercel rebuilds from that commit.
+A GitHub Action runs at 15 minutes past each hour, fetches the newest PGCB pages, and commits `data/*.json` **only if the newest timestamp changed**. Vercel rebuilds from that commit.
 
 Connect this GitHub repo to a Vercel Hobby project (root directory `.`, framework Astro). Public Actions minutes are free; the workflow does not run on its own JSON commits, so it will not loop.
 

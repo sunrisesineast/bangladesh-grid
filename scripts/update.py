@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the newest PGCB pages and upsert public/data JSON. Commit only if timestamps moved."""
+"""Fetch the newest PGCB pages and upsert data/*.json. Commit only if timestamps moved."""
 
 from __future__ import annotations
 

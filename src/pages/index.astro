@@ -2,9 +2,9 @@
 import { readFileSync } from "node:fs";
 import "../styles/global.css";
 
-const latest = JSON.parse(readFileSync("public/data/latest.json", "utf8"));
-const daily = JSON.parse(readFileSync("public/data/daily.json", "utf8"));
-const monthly = JSON.parse(readFileSync("public/data/monthly.json", "utf8"));
+const latest = JSON.parse(readFileSync("data/latest.json", "utf8"));
+const daily = JSON.parse(readFileSync("data/daily.json", "utf8"));
+const monthly = JSON.parse(readFileSync("data/monthly.json", "utf8"));
 
 const current = latest.current;
 const last7 = (daily.days ?? []).slice(-7);
@@ -26,6 +26,33 @@ function importsOf(row: Record<string, number>) {
     Number(row.adani || 0) +
     Number(row.nepal || 0)
   );
+}
+
+function slimMix(
+  row: Record<string, number | string>,
+  label: string,
+) {
+  return {
+    label,
+    gas: Number(row.gas || 0),
+    liquid_fuel: Number(row.liquid_fuel || 0),
+    coal: Number(row.coal || 0),
+    hydro: Number(row.hydro || 0),
+    solar: Number(row.solar || 0),
+    wind: Number(row.wind || 0),
+    imports: importsOf(row as Record<string, number>),
+  };
+}
+
+function fmtTick(iso: string) {
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Dhaka",
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date(iso));
 }
 
 function fmtMw(n: number) {
@@ -58,9 +85,20 @@ const lastMonth = months[months.length - 1]?.month ?? "";
 const rangeLabel = firstMonth && lastMonth ? `${firstMonth} – ${lastMonth}` : "";
 
 const chartData = {
-  hourly: latest.hourly ?? [],
-  last7,
-  months,
+  hourly: {
+    labels: (latest.hourly ?? []).map((h: { datetime: string }) =>
+      fmtTick(h.datetime),
+    ),
+    values: (latest.hourly ?? []).map(
+      (h: { generation_mw: number }) => h.generation_mw,
+    ),
+  },
+  last7: last7.map((d: Record<string, number | string>) =>
+    slimMix(d, String(d.date)),
+  ),
+  months: months.map((d: Record<string, number | string>) =>
+    slimMix(d, String(d.month)),
+  ),
 };
 ---
 
@@ -163,12 +201,6 @@ const chartData = {
       <p class="muted">
         JSON updated {fmtWhen(latest.updated_at)}.{" "}
         <a href="https://github.com/sunrisesineast/bangladesh-grid">Source code</a>
-        {" · "}
-        <a href="/data/latest.json">latest.json</a>
-        {" · "}
-        <a href="/data/daily.json">daily.json</a>
-        {" · "}
-        <a href="/data/monthly.json">monthly.json</a>
       </p>
     </footer>
 

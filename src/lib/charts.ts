@@ -1,27 +1,45 @@
-import Chart from "chart.js/auto";
-import "chartjs-adapter-date-fns";
+import {
+  BarController,
+  BarElement,
+  CategoryScale,
+  Chart,
+  Filler,
+  Legend,
+  LinearScale,
+  LineController,
+  LineElement,
+  PointElement,
+  Tooltip,
+} from "chart.js";
 
-export type FuelRow = {
-  datetime?: string;
-  date?: string;
-  month?: string;
-  generation_mw: number;
+Chart.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  Filler,
+  Legend,
+  LinearScale,
+  LineController,
+  LineElement,
+  PointElement,
+  Tooltip,
+);
+
+export type MixRow = {
+  label: string;
   gas: number;
   liquid_fuel: number;
   coal: number;
   hydro: number;
   solar: number;
   wind: number;
-  bheramara: number;
-  tripura: number;
-  adani: number;
-  nepal: number;
+  imports: number;
 };
 
 export type GridData = {
-  hourly: FuelRow[];
-  last7: FuelRow[];
-  months: FuelRow[];
+  hourly: { labels: string[]; values: number[] };
+  last7: MixRow[];
+  months: MixRow[];
 };
 
 const COLORS = {
@@ -45,20 +63,6 @@ const STACK = [
   { key: "imports", label: "Imports" },
 ] as const;
 
-function importsOf(row: FuelRow) {
-  return (
-    Number(row.bheramara || 0) +
-    Number(row.tripura || 0) +
-    Number(row.adani || 0) +
-    Number(row.nepal || 0)
-  );
-}
-
-function fuelValue(row: FuelRow, key: string) {
-  if (key === "imports") return importsOf(row);
-  return Number(row[key as keyof FuelRow] || 0);
-}
-
 const baseOptions = {
   responsive: true,
   maintainAspectRatio: true,
@@ -70,10 +74,10 @@ const baseOptions = {
   },
 };
 
-function stackedDatasets(rows: FuelRow[]) {
+function stackedDatasets(rows: MixRow[]) {
   return STACK.map((fuel) => ({
     label: fuel.label,
-    data: rows.map((row) => fuelValue(row, fuel.key)),
+    data: rows.map((row) => Number(row[fuel.key] || 0)),
     backgroundColor: COLORS[fuel.key],
     borderColor: COLORS[fuel.key],
     borderWidth: 0,
@@ -93,13 +97,11 @@ export function renderCharts(data: GridData) {
   new Chart(hourly, {
     type: "line",
     data: {
+      labels: data.hourly.labels,
       datasets: [
         {
           label: "Generation (MW)",
-          data: data.hourly.map((row) => ({
-            x: row.datetime,
-            y: row.generation_mw,
-          })),
+          data: data.hourly.values,
           borderColor: COLORS.total,
           backgroundColor: "transparent",
           pointRadius: 0,
@@ -115,10 +117,8 @@ export function renderCharts(data: GridData) {
       },
       scales: {
         x: {
-          type: "time",
-          time: { tooltipFormat: "d MMM yyyy HH:mm" },
           title: { display: true, text: "Bangladesh time" },
-          ticks: { maxRotation: 0 },
+          ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 8 },
           grid: { color: "#e6e0d6" },
         },
         y: {
@@ -132,7 +132,7 @@ export function renderCharts(data: GridData) {
   new Chart(week, {
     type: "bar",
     data: {
-      labels: data.last7.map((row) => row.date),
+      labels: data.last7.map((row) => row.label),
       datasets: stackedDatasets(data.last7),
     },
     options: {
@@ -155,7 +155,7 @@ export function renderCharts(data: GridData) {
   new Chart(monthly, {
     type: "line",
     data: {
-      labels: data.months.map((row) => row.month),
+      labels: data.months.map((row) => row.label),
       datasets: stackedDatasets(data.months),
     },
     options: {

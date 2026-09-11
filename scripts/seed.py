@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Seed public/data JSON from a local PGCB hourly CSV. The CSV is not committed."""
+"""Seed data/*.json from a local PGCB hourly CSV. The CSV is not committed."""
 
 from __future__ import annotations
 

@@ -295,7 +295,8 @@ def read_json(path: Path) -> dict | None:
 
 
 def data_dir(root: Path) -> Path:
-    return root / "public" / "data"
+    """Repo-local JSON. Not copied to the site, so visitors cannot fetch daily.json."""
+    return root / "data"
 
 
 def newest_iso(hours: dict[str, Hour]) -> str | None:
