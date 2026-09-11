@@ -1,0 +1,202 @@
+:root {
+  --bg: #f3efe6;
+  --ink: #1a1814;
+  --muted: #6b6560;
+  --rule: #d8d0c4;
+  --accent: #1f5c45;
+  --gas: #3d6b99;
+  --liquid: #c4842a;
+  --coal: #3a3a3a;
+  --hydro: #2a8a82;
+  --solar: #c9a227;
+  --wind: #5a9eaf;
+  --imports: #6b5b95;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+body {
+  margin: 0 auto;
+  max-width: 52rem;
+  padding: 2.5rem 1.25rem 4rem;
+  font-family: "Palatino Linotype", Palatino, "Iowan Old Style", Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+h1,
+h2 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  margin: 0.2rem 0 0.6rem;
+  font-size: 2rem;
+}
+
+h2 {
+  margin: 2.5rem 0 0.4rem;
+  font-size: 1.25rem;
+}
+
+p,
+ul {
+  margin: 0 0 0.8rem;
+}
+
+a {
+  color: var(--accent);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-family: system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lede,
+.caption,
+.muted,
+footer {
+  color: var(--muted);
+}
+
+.lede {
+  max-width: 38rem;
+}
+
+.kicker {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero {
+  margin-top: 2.2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--rule);
+}
+
+.mw {
+  margin: 0.15rem 0 0.2rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.mw-num {
+  font-family: system-ui, sans-serif;
+  font-size: 3.1rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.mw-unit {
+  font-family: system-ui, sans-serif;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.when {
+  font-family: system-ui, sans-serif;
+  font-size: 0.95rem;
+}
+
+.mixbar {
+  display: flex;
+  height: 0.7rem;
+  margin: 1.2rem 0 0.8rem;
+  overflow: hidden;
+  background: var(--rule);
+}
+
+.seg {
+  display: block;
+  height: 100%;
+}
+
+.seg-gas,
+.dot.seg-gas {
+  background: var(--gas);
+}
+.seg-liquid_fuel,
+.dot.seg-liquid_fuel {
+  background: var(--liquid);
+}
+.seg-coal,
+.dot.seg-coal {
+  background: var(--coal);
+}
+.seg-hydro,
+.dot.seg-hydro {
+  background: var(--hydro);
+}
+.seg-solar,
+.dot.seg-solar {
+  background: var(--solar);
+}
+.seg-wind,
+.dot.seg-wind {
+  background: var(--wind);
+}
+.seg-imports,
+.dot.seg-imports {
+  background: var(--imports);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.1rem;
+  padding: 0;
+  list-style: none;
+  font-family: system-ui, sans-serif;
+  font-size: 0.88rem;
+}
+
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+}
+
+section canvas {
+  width: 100% !important;
+  max-height: 20rem;
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+}
+
+.caption {
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+}

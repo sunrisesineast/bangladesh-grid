@@ -1,0 +1,182 @@
+---
+import { readFileSync } from "node:fs";
+import "../styles/global.css";
+
+const latest = JSON.parse(readFileSync("public/data/latest.json", "utf8"));
+const daily = JSON.parse(readFileSync("public/data/daily.json", "utf8"));
+const monthly = JSON.parse(readFileSync("public/data/monthly.json", "utf8"));
+
+const current = latest.current;
+const last7 = (daily.days ?? []).slice(-7);
+const months = monthly.months ?? [];
+
+const FUELS = [
+  { key: "gas", label: "Gas" },
+  { key: "liquid_fuel", label: "Liquid fuel" },
+  { key: "coal", label: "Coal" },
+  { key: "hydro", label: "Hydro" },
+  { key: "solar", label: "Solar" },
+  { key: "wind", label: "Wind" },
+] as const;
+
+function importsOf(row: Record<string, number>) {
+  return (
+    Number(row.bheramara || 0) +
+    Number(row.tripura || 0) +
+    Number(row.adani || 0) +
+    Number(row.nepal || 0)
+  );
+}
+
+function fmtMw(n: number) {
+  return Math.round(n).toLocaleString("en-US");
+}
+
+function fmtWhen(iso: string) {
+  const d = new Date(iso);
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Dhaka",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(d);
+}
+
+const mix = [
+  ...FUELS.map((f) => ({
+    ...f,
+    mw: Number(current[f.key] || 0),
+  })),
+  { key: "imports", label: "Imports", mw: importsOf(current) },
+];
+const mixTotal = mix.reduce((s, x) => s + x.mw, 0) || 1;
+const firstMonth = months[0]?.month ?? "";
+const lastMonth = months[months.length - 1]?.month ?? "";
+const rangeLabel = firstMonth && lastMonth ? `${firstMonth} – ${lastMonth}` : "";
+
+const chartData = {
+  hourly: latest.hourly ?? [],
+  last7,
+  months,
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Bangladesh Grid</title>
+    <meta
+      name="description"
+      content="Unofficial dashboard of hourly electricity generation on the Bangladesh grid, from Power Grid Bangladesh PLC public data."
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <p class="eyebrow">Unofficial</p>
+      <h1>Bangladesh Grid</h1>
+      <p class="lede">
+        Hourly generation dispatched on the national grid, compiled from the
+        public Power Grid Bangladesh PLC table. This is not an official site.
+      </p>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="now-label">
+        <p id="now-label" class="kicker">Latest generation</p>
+        <p class="mw">
+          <span class="mw-num">{fmtMw(current.generation_mw)}</span>
+          <span class="mw-unit">MW</span>
+        </p>
+        <p class="when">
+          {fmtWhen(current.datetime)} Bangladesh time
+          {current.remark ? ` · ${current.remark}` : ""}
+        </p>
+
+        <div
+          class="mixbar"
+          role="img"
+          aria-label="Fuel mix of the latest snapshot"
+        >
+          {
+            mix.map((item) => (
+              <span
+                class={`seg seg-${item.key}`}
+                style={`width:${(item.mw / mixTotal) * 100}%`}
+                title={`${item.label}: ${fmtMw(item.mw)} MW`}
+              />
+            ))
+          }
+        </div>
+        <ul class="legend">
+          {
+            mix.map((item) => (
+              <li>
+                <span class={`dot seg-${item.key}`} />
+                {item.label}
+                <span class="muted">{fmtMw(item.mw)} MW</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section aria-labelledby="h48">
+        <h2 id="h48">Last 48 hours</h2>
+        <p class="caption">
+          Total generation (MW), including the 19:30 evening-peak row when PGCB
+          publishes it.
+        </p>
+        <canvas id="chart-48h" height="120"></canvas>
+      </section>
+
+      <section aria-labelledby="h7">
+        <h2 id="h7">Last 7 days</h2>
+        <p class="caption">Daily mean mix (MW). Imports are HVDC Bheramara, Tripura, Adani, and Nepal combined.</p>
+        <canvas id="chart-7d" height="140"></canvas>
+      </section>
+
+      <section aria-labelledby="hmo">
+        <h2 id="hmo">Monthly mix</h2>
+        <p class="caption">
+          Mean generation by fuel, {rangeLabel}. Seeded from the public PGCB
+          hourly archive; the last month updates as new hours arrive.
+        </p>
+        <canvas id="chart-monthly" height="160"></canvas>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Source:{" "}
+        <a href={latest.source}>
+          {latest.source_name} generation table
+        </a>
+        . Figures are dispatched generation in MW, Asia/Dhaka, not billed
+        consumption or load-shedding.
+      </p>
+      <p class="muted">
+        JSON updated {fmtWhen(latest.updated_at)}.{" "}
+        <a href="https://github.com/sunrisesineast/bangladesh-grid">Source code</a>
+        {" · "}
+        <a href="/data/latest.json">latest.json</a>
+        {" · "}
+        <a href="/data/daily.json">daily.json</a>
+        {" · "}
+        <a href="/data/monthly.json">monthly.json</a>
+      </p>
+    </footer>
+
+    <script id="grid-data" type="application/json" set:html={JSON.stringify(chartData)} />
+    <script>
+      import { renderCharts } from "../lib/charts.ts";
+      const el = document.getElementById("grid-data");
+      if (el?.textContent) renderCharts(JSON.parse(el.textContent));
+    </script>
+  </body>
+</html>
