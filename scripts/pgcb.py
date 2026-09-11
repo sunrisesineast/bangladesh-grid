@@ -70,6 +70,8 @@ def fetch(
             if resp.status_code == 200:
                 return resp.text
             last_err = RuntimeError(f"HTTP {resp.status_code}")
+        except requests.exceptions.SSLError:
+            raise
         except requests.RequestException as exc:
             last_err = exc
         wait = delay * (2 ** (attempt - 1))
