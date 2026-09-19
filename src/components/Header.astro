@@ -1,0 +1,29 @@
+---
+interface Props {
+  current: "generation" | "demand";
+}
+
+const { current } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="header-top">
+    <p class="eyebrow">Unofficial</p>
+    <nav class="site-nav" aria-label="Site">
+      <a
+        href="/"
+        aria-current={current === "generation" ? "page" : undefined}
+      >
+        Generation
+      </a>
+      <a
+        href="/demand"
+        aria-current={current === "demand" ? "page" : undefined}
+      >
+        Demand
+      </a>
+    </nav>
+  </div>
+  <h1>Bangladesh Grid</h1>
+  <slot />
+</header>

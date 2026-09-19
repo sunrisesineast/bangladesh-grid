@@ -1,0 +1,313 @@
+---
+import { existsSync, readFileSync } from "node:fs";
+import Header from "../components/Header.astro";
+import "../styles/global.css";
+
+type Peak = {
+  generation_mw: number;
+  demand_mw: number;
+  time: string;
+  load_shed_mw?: number;
+};
+
+type Zone = { zone: string; load_shed_mw: number; demand_mw: number };
+
+type DayRow = {
+  date: string;
+  source_pdf: string;
+  day_peak: Peak;
+  evening_peak: Peak;
+  energy: {
+    generated_gwh: number;
+    demand_gwh: number;
+    unserved_gwh: number;
+  };
+  zones: Zone[];
+};
+
+function readJson(path: string) {
+  if (!existsSync(path)) return null;
+  return JSON.parse(readFileSync(path, "utf8"));
+}
+
+const latest = readJson("data/nldc-latest.json");
+const daily = readJson("data/nldc-daily.json");
+const current: DayRow | null = latest?.current ?? null;
+const days: DayRow[] = daily?.days ?? [];
+const showCharts =
+  days.filter((d) => d.evening_peak?.load_shed_mw != null).length >= 2;
+
+function fmtMw(n: number) {
+  return Math.round(n).toLocaleString("en-US");
+}
+
+function fmtGwh(n: number) {
+  const digits = Math.abs(n) >= 10 ? 1 : 2;
+  return n.toLocaleString("en-US", {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  });
+}
+
+function fmtDate(iso: string) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "UTC",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(dt);
+}
+
+function fmtWhen(iso: string) {
+  const d = new Date(iso);
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Dhaka",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(d);
+}
+
+const chartDays = days.map((d) => ({
+  date: d.date,
+  evening_load_shed_mw: d.evening_peak.load_shed_mw ?? null,
+  unserved_gwh: d.energy.unserved_gwh ?? null,
+}));
+
+const zoneTotalShed = (current?.zones ?? []).reduce(
+  (s, z) => s + Number(z.load_shed_mw || 0),
+  0,
+);
+const zoneTotalDemand = (current?.zones ?? []).reduce(
+  (s, z) => s + Number(z.demand_mw || 0),
+  0,
+);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Demand and load-shedding — Bangladesh Grid</title>
+    <meta
+      name="description"
+      content="Unofficial daily demand, unserved energy, and zone-wise evening load-shedding from the NLDC System Summary Report."
+    />
+  </head>
+  <body>
+    <Header current="demand">
+      <p class="lede">
+        Daily demand, unserved energy, and evening-peak load-shedding from the
+        National Load Dispatch Center System Summary, linked via the BPDB
+        archive. This is not an official site, and it is not a neighbourhood
+        feeder schedule.
+      </p>
+    </Header>
+
+    <main>
+      {
+        current ? (
+          <>
+            <section class="hero" aria-labelledby="nldc-label">
+              <p id="nldc-label" class="kicker">
+                Evening peak · {fmtDate(current.date)}
+              </p>
+              <div class="stat-grid">
+                <div>
+                  <p class="kicker">Generation</p>
+                  <p class="mw">
+                    <span class="mw-num stat-num">
+                      {fmtMw(current.evening_peak.generation_mw)}
+                    </span>
+                    <span class="mw-unit">MW</span>
+                  </p>
+                </div>
+                <div>
+                  <p class="kicker">Demand</p>
+                  <p class="mw">
+                    <span class="mw-num stat-num">
+                      {fmtMw(current.evening_peak.demand_mw)}
+                    </span>
+                    <span class="mw-unit">MW</span>
+                  </p>
+                </div>
+                <div>
+                  <p class="kicker">Load-shed</p>
+                  <p class="mw">
+                    <span class="mw-num stat-num">
+                      {fmtMw(current.evening_peak.load_shed_mw || 0)}
+                    </span>
+                    <span class="mw-unit">MW</span>
+                  </p>
+                </div>
+              </div>
+              <p class="when">
+                {current.evening_peak.time} Bangladesh time · NLDC System
+                Summary
+              </p>
+            </section>
+
+            <section aria-labelledby="energy-label">
+              <h2 id="energy-label">Daily energy</h2>
+              <div class="stat-grid">
+                <div>
+                  <p class="kicker">Generated</p>
+                  <p class="mw">
+                    <span class="mw-num stat-num">
+                      {fmtGwh(current.energy.generated_gwh)}
+                    </span>
+                    <span class="mw-unit">GWh</span>
+                  </p>
+                </div>
+                <div>
+                  <p class="kicker">Demand</p>
+                  <p class="mw">
+                    <span class="mw-num stat-num">
+                      {fmtGwh(current.energy.demand_gwh)}
+                    </span>
+                    <span class="mw-unit">GWh</span>
+                  </p>
+                </div>
+                <div>
+                  <p class="kicker">Unserved</p>
+                  <p class="mw">
+                    <span class="mw-num stat-num">
+                      {fmtGwh(current.energy.unserved_gwh)}
+                    </span>
+                    <span class="mw-unit">GWh</span>
+                  </p>
+                </div>
+              </div>
+              <p class="caption">
+                Day peak {fmtMw(current.day_peak.generation_mw)} MW generation
+                vs {fmtMw(current.day_peak.demand_mw)} MW demand at{" "}
+                {current.day_peak.time}.
+              </p>
+            </section>
+
+            <section aria-labelledby="zones-label">
+              <h2 id="zones-label">Evening-peak load-shed by zone</h2>
+              <p class="caption">
+                MW at {current.evening_peak.time}. National total is the NLDC
+                zone-sum, not demand minus generation.
+              </p>
+              <div class="table-wrap">
+                <table class="zone-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Zone</th>
+                      <th scope="col">Load-shed</th>
+                      <th scope="col">Demand</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {current.zones.map((z) => (
+                      <tr>
+                        <th scope="row">{z.zone}</th>
+                        <td>{fmtMw(z.load_shed_mw)} MW</td>
+                        <td>{fmtMw(z.demand_mw)} MW</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th scope="row">Total</th>
+                      <td>
+                        {fmtMw(current.evening_peak.load_shed_mw || zoneTotalShed)}{" "}
+                        MW
+                      </td>
+                      <td>{fmtMw(zoneTotalDemand)} MW</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </section>
+          </>
+        ) : (
+          <section class="hero">
+            <p class="kicker">NLDC report</p>
+            <p class="lede">
+              No daily System Summary has been parsed yet. The next scheduled
+              fetch is 15:00 or 22:00 Bangladesh time.
+            </p>
+          </section>
+        )
+      }
+
+      {
+        showCharts ? (
+          <>
+            <section aria-labelledby="shed-history">
+              <h2 id="shed-history">Evening load-shed</h2>
+              <p class="caption">
+                National zone-sum at evening peak (MW). Missing report days
+                break the line.
+              </p>
+              <div class="chart-frame chart-frame-short">
+                <canvas id="chart-shed"></canvas>
+              </div>
+            </section>
+            <section aria-labelledby="unserved-history">
+              <h2 id="unserved-history">Energy unserved</h2>
+              <p class="caption">Daily unserved energy (GWh).</p>
+              <div class="chart-frame chart-frame-short">
+                <canvas id="chart-unserved"></canvas>
+              </div>
+            </section>
+          </>
+        ) : current ? (
+          <p class="caption">
+            History appears as daily reports land. Evening load-shed and
+            unserved energy will chart once two days are stored.
+          </p>
+        ) : null
+      }
+    </main>
+
+    <footer>
+      <p>
+        Source:{" "}
+        <a href={latest?.source ?? "https://misc.bpdb.gov.bd/daily-generation-archive"}>
+          {latest?.source_name ?? "NLDC System Summary Report (via BPDB)"}
+        </a>
+        {current ? (
+          <>
+            {" "}
+            ·{" "}
+            <a href={current.source_pdf}>Page 1 PDF for {fmtDate(current.date)}</a>
+          </>
+        ) : null}
+        . Figures are daily NLDC totals, Asia/Dhaka, not hourly PGCB generation
+        and not billed consumption.
+      </p>
+      <p class="muted">
+        {latest?.updated_at ? <>JSON updated {fmtWhen(latest.updated_at)}. </> : null}
+        <a href="https://github.com/sunrisesineast/bangladesh-grid">Source code</a>
+      </p>
+    </footer>
+
+    {
+      showCharts ? (
+        <>
+          <script
+            id="nldc-data"
+            type="application/json"
+            set:html={JSON.stringify(chartDays)}
+          />
+          <script>
+            import { renderDemandCharts } from "../lib/demand-charts.ts";
+            const el = document.getElementById("nldc-data");
+            if (el?.textContent) renderDemandCharts(JSON.parse(el.textContent));
+          </script>
+        </>
+      ) : null
+    }
+  </body>
+</html>

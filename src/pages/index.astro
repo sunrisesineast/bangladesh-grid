@@ -1,14 +1,20 @@
 ---
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import Header from "../components/Header.astro";
 import "../styles/global.css";
 
 const latest = JSON.parse(readFileSync("data/latest.json", "utf8"));
 const daily = JSON.parse(readFileSync("data/daily.json", "utf8"));
 const monthly = JSON.parse(readFileSync("data/monthly.json", "utf8"));
+const nldc = existsSync("data/nldc-latest.json")
+  ? JSON.parse(readFileSync("data/nldc-latest.json", "utf8"))
+  : null;
 
 const current = latest.current;
-const last7 = (daily.days ?? []).slice(-7);
+const days = (daily.days ?? []).slice(-8);
+const last7 = days.slice(-7);
 const months = monthly.months ?? [];
+const last12 = months.slice(-12);
 
 const FUELS = [
   { key: "gas", label: "Gas" },
@@ -17,6 +23,13 @@ const FUELS = [
   { key: "hydro", label: "Hydro" },
   { key: "solar", label: "Solar" },
   { key: "wind", label: "Wind" },
+] as const;
+
+const CORRIDORS = [
+  { key: "bheramara", label: "Bheramara" },
+  { key: "tripura", label: "Tripura" },
+  { key: "adani", label: "Adani" },
+  { key: "nepal", label: "Nepal" },
 ] as const;
 
 function importsOf(row: Record<string, number>) {
@@ -28,31 +41,20 @@ function importsOf(row: Record<string, number>) {
   );
 }
 
-function slimMix(
-  row: Record<string, number | string>,
-  label: string,
-) {
+function slimRow(row: Record<string, number | string>) {
   return {
-    label,
+    generation_mw: Number(row.generation_mw || 0),
     gas: Number(row.gas || 0),
     liquid_fuel: Number(row.liquid_fuel || 0),
     coal: Number(row.coal || 0),
     hydro: Number(row.hydro || 0),
     solar: Number(row.solar || 0),
     wind: Number(row.wind || 0),
-    imports: importsOf(row as Record<string, number>),
+    bheramara: Number(row.bheramara || 0),
+    tripura: Number(row.tripura || 0),
+    adani: Number(row.adani || 0),
+    nepal: Number(row.nepal || 0),
   };
-}
-
-function fmtTick(iso: string) {
-  return new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Asia/Dhaka",
-    day: "numeric",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).format(new Date(iso));
 }
 
 function fmtMw(n: number) {
@@ -72,6 +74,38 @@ function fmtWhen(iso: string) {
   }).format(d);
 }
 
+function fmtDate(iso: string) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "UTC",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(dt);
+}
+
+function fmtGwh(n: number) {
+  const digits = Math.abs(n) >= 10 ? 1 : 2;
+  return n.toLocaleString("en-US", {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  });
+}
+
+function addDays(iso: string, days: number) {
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d + days));
+  return dt.toISOString().slice(0, 10);
+}
+
+const todayDhaka = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Dhaka",
+}).format(new Date());
+const nldcCurrent = nldc?.current ?? null;
+const nldcIsYesterday =
+  nldcCurrent && nldcCurrent.date === addDays(todayDhaka, -1);
+
 const mix = [
   ...FUELS.map((f) => ({
     ...f,
@@ -83,22 +117,34 @@ const mixTotal = mix.reduce((s, x) => s + x.mw, 0) || 1;
 const firstMonth = months[0]?.month ?? "";
 const lastMonth = months[months.length - 1]?.month ?? "";
 const rangeLabel = firstMonth && lastMonth ? `${firstMonth} – ${lastMonth}` : "";
+const defaultRange =
+  last12.length >= 2
+    ? `${last12[0].month} – ${last12[last12.length - 1].month}`
+    : rangeLabel;
 
 const chartData = {
-  hourly: {
-    labels: (latest.hourly ?? []).map((h: { datetime: string }) =>
-      fmtTick(h.datetime),
-    ),
-    values: (latest.hourly ?? []).map(
-      (h: { generation_mw: number }) => h.generation_mw,
-    ),
+  current: {
+    ...slimRow(current),
+    datetime: String(current.datetime),
+    remark: String(current.remark || ""),
   },
-  last7: last7.map((d: Record<string, number | string>) =>
-    slimMix(d, String(d.date)),
-  ),
-  months: months.map((d: Record<string, number | string>) =>
-    slimMix(d, String(d.month)),
-  ),
+  hourly: (latest.hourly ?? []).map((h: Record<string, number | string>) => ({
+    ...slimRow(h),
+    datetime: String(h.datetime),
+    remark: String(h.remark || ""),
+  })),
+  last7: last7.map((d: Record<string, number | string>) => ({
+    ...slimRow(d),
+    date: String(d.date),
+  })),
+  prevDay:
+    days.length > 7
+      ? { ...slimRow(days[0]), date: String(days[0].date) }
+      : null,
+  months: months.map((d: Record<string, number | string>) => ({
+    ...slimRow(d),
+    month: String(d.month),
+  })),
 };
 ---
 
@@ -115,14 +161,12 @@ const chartData = {
     />
   </head>
   <body>
-    <header class="site-header">
-      <p class="eyebrow">Unofficial</p>
-      <h1>Bangladesh Grid</h1>
+    <Header current="generation">
       <p class="lede">
         Hourly generation dispatched on the national grid, compiled from the
         public Power Grid Bangladesh PLC table. This is not an official site.
       </p>
-    </header>
+    </Header>
 
     <main>
       <section class="hero" aria-labelledby="now-label">
@@ -138,54 +182,195 @@ const chartData = {
 
         <div
           class="mixbar"
-          role="img"
-          aria-label="Fuel mix of the latest snapshot"
+          role="group"
+          aria-label="Fuel mix of the latest snapshot. Click a band to isolate that fuel on the charts."
         >
           {
             mix.map((item) => (
-              <span
+              <button
+                type="button"
                 class={`seg seg-${item.key}`}
                 style={`width:${(item.mw / mixTotal) * 100}%`}
-                title={`${item.label}: ${fmtMw(item.mw)} MW`}
+                data-fuel={item.key}
+                title={`Isolate ${item.label} on the charts`}
+                aria-label={`${item.label}: ${fmtMw(item.mw)} MW. Isolate on the charts.`}
               />
             ))
           }
         </div>
-        <ul class="legend">
-          {
-            mix.map((item) => (
-              <li>
-                <span class={`dot seg-${item.key}`} />
-                {item.label}
-                <span class="muted">{fmtMw(item.mw)} MW</span>
-              </li>
-            ))
-          }
-        </ul>
+        <div class="fuel-filters">
+          <p class="kicker" id="fuel-filter-label">Isolate a fuel</p>
+          <ul
+            class="legend"
+            id="fuel-legend"
+            aria-labelledby="fuel-filter-label"
+          >
+            <li>
+              <button
+                type="button"
+                data-fuel="all"
+                aria-pressed="true"
+                title="Show all fuels on the charts"
+              >
+                All fuels
+              </button>
+            </li>
+            {
+              mix.map((item) => (
+                <li>
+                  <button
+                    type="button"
+                    data-fuel={item.key}
+                    aria-pressed="false"
+                    title={`Isolate ${item.label} on the charts`}
+                  >
+                    <span
+                      class={`fuel-swatch seg-${item.key}`}
+                      aria-hidden="true"
+                    ></span>
+                    <span class="fuel-copy">
+                      {item.label}
+                      <span class="muted">{fmtMw(item.mw)} MW</span>
+                    </span>
+                  </button>
+                </li>
+              ))
+            }
+          </ul>
+          <div class="corridor-block" id="corridor-legend" hidden>
+            <p class="kicker">Import corridors</p>
+            <ul class="legend" aria-label="Import corridors">
+              {
+                CORRIDORS.map((item) => (
+                  <li>
+                    <button
+                      type="button"
+                      data-fuel={item.key}
+                      aria-pressed="false"
+                      title={`Isolate ${item.label} on the charts`}
+                    >
+                      <span
+                        class={`fuel-swatch seg-${item.key}`}
+                        aria-hidden="true"
+                      ></span>
+                      <span class="fuel-copy">
+                        {item.label}
+                        <span class="muted">
+                          {fmtMw(Number(current[item.key] || 0))} MW
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <p class="hint">Charts below follow this filter.</p>
+        </div>
+        <div
+          id="focus-readout"
+          class="focus-readout"
+          hidden
+          aria-live="polite"
+        ></div>
       </section>
 
+      {
+        nldcCurrent ? (
+          <section class="nldc-strip" aria-labelledby="nldc-strip-label">
+            <a class="nldc-strip-link" href="/demand">
+              <p id="nldc-strip-label" class="kicker">
+                {nldcIsYesterday ? "Yesterday (NLDC)" : "NLDC report"}
+              </p>
+              <div class="nldc-pair">
+                <p class="nldc-stat">
+                  <span class="nldc-num">
+                    {fmtGwh(nldcCurrent.energy.unserved_gwh)}
+                  </span>
+                  <span class="nldc-unit">GWh unserved</span>
+                </p>
+                <p class="nldc-stat">
+                  <span class="nldc-num">
+                    {fmtMw(nldcCurrent.evening_peak.load_shed_mw || 0)}
+                  </span>
+                  <span class="nldc-unit">MW evening load-shed</span>
+                </p>
+              </div>
+              <p class="when">
+                {fmtDate(nldcCurrent.date)} · daily System Summary, not this
+                hour’s generation
+              </p>
+            </a>
+          </section>
+        ) : null
+      }
+
       <section aria-labelledby="h48">
-        <h2 id="h48">Last 48 hours</h2>
-        <p class="caption">
+        <div class="section-head">
+          <h2 id="h48">Last 48 hours</h2>
+          <div class="segmented" role="group" aria-label="48-hour chart mode">
+            <button type="button" data-hourly="total" aria-pressed="true">
+              Total
+            </button>
+            <button type="button" data-hourly="mix" aria-pressed="false">
+              Mix
+            </button>
+          </div>
+        </div>
+        <p class="caption" id="caption-hourly">
           Total generation (MW), including the 19:30 evening-peak row when PGCB
           publishes it.
         </p>
-        <canvas id="chart-48h" height="120"></canvas>
+        <div class="chart-frame">
+          <canvas id="chart-48h"></canvas>
+        </div>
+        <div class="inspect" id="inspect-hourly" hidden></div>
       </section>
 
       <section aria-labelledby="h7">
-        <h2 id="h7">Last 7 days</h2>
-        <p class="caption">Daily mean mix (MW). Imports are HVDC Bheramara, Tripura, Adani, and Nepal combined.</p>
-        <canvas id="chart-7d" height="140"></canvas>
+        <div class="section-head">
+          <h2 id="h7">Last 7 days</h2>
+          <div class="segmented" role="group" aria-label="Units">
+            <button type="button" data-unit="mw" aria-pressed="true">MW</button>
+            <button type="button" data-unit="share" aria-pressed="false">
+              Share
+            </button>
+          </div>
+        </div>
+        <p class="caption" id="caption-7d">
+          Daily mean mix (MW). Imports are HVDC Bheramara, Tripura, Adani, and
+          Nepal combined.
+        </p>
+        <div class="chart-frame">
+          <canvas id="chart-7d"></canvas>
+        </div>
+        <div class="inspect" id="inspect-7d" hidden></div>
       </section>
 
       <section aria-labelledby="hmo">
-        <h2 id="hmo">Monthly mix</h2>
-        <p class="caption">
-          Mean generation by fuel, {rangeLabel}. Seeded from the public PGCB
+        <div class="section-head">
+          <h2 id="hmo">Monthly mix</h2>
+          <div class="segmented" role="group" aria-label="Units">
+            <button type="button" data-unit="mw" aria-pressed="true">MW</button>
+            <button type="button" data-unit="share" aria-pressed="false">
+              Share
+            </button>
+          </div>
+        </div>
+        <div
+          id="month-windows"
+          class="chips"
+          role="group"
+          aria-label="Monthly range"
+        ></div>
+        <p class="caption" id="caption-monthly">
+          Mean generation by fuel, {defaultRange}. Seeded from the public PGCB
           hourly archive; the last month updates as new hours arrive.
         </p>
-        <canvas id="chart-monthly" height="160"></canvas>
+        <div class="chart-frame">
+          <canvas id="chart-monthly"></canvas>
+        </div>
+        <div class="inspect" id="inspect-monthly" hidden></div>
       </section>
     </main>
 
@@ -196,7 +381,8 @@ const chartData = {
           {latest.source_name} generation table
         </a>
         . Figures are dispatched generation in MW, Asia/Dhaka, not billed
-        consumption or load-shedding.
+        consumption. Daily demand and load-shedding are on the{" "}
+        <a href="/demand">Demand</a> page, from the NLDC summary.
       </p>
       <p class="muted">
         JSON updated {fmtWhen(latest.updated_at)}.{" "}

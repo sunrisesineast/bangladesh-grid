@@ -34,3 +34,4 @@ __pycache__/
 # local scrape archive — never publish
 *.csv
 *.xlsx
+*.pdf

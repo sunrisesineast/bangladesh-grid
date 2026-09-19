@@ -1,0 +1,37 @@
+name: Update NLDC demand data
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+    - cron: "0 16 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: update-nldc
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install scraper
+        run: pip install -r requirements.txt
+      - name: Fetch recent NLDC Page 1 PDFs
+        run: python scripts/update_nldc.py
+      - name: Commit if an NLDC report moved
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/nldc-latest.json data/nldc-daily.json
+          if git diff --staged --quiet; then
+            echo "No data change"
+          else
+            git commit -m "Update NLDC demand data"
+            git push
+          fi
