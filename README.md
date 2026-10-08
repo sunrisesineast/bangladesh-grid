@@ -43,7 +43,7 @@ Hourly PGCB refresh (pages 1–2 of the live table):
 python scripts/update.py
 ```
 
-Daily NLDC refresh (archive pages 1–2, 14-day lookback):
+Daily NLDC refresh (archive pages 1–2, 30-day lookback):
 
 ```bash
 python scripts/update_nldc.py

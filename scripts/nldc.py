@@ -21,7 +21,9 @@ TZ = ZoneInfo("Asia/Dhaka")
 ARCHIVE_URL = "https://misc.bpdb.gov.bd/daily-generation-archive"
 SOURCE_NAME = "NLDC System Summary Report (via BPDB)"
 ARCHIVE_PAGES = 2
-LOOKBACK_DAYS = 14
+# Two archive pages hold about three weeks of Page 1 PDFs. A shorter window
+# permanently drops days when CI is broken longer than the lookback.
+LOOKBACK_DAYS = 30
 MAX_MW = 25_000
 MAX_GWH = 600.0
 
@@ -462,7 +464,7 @@ def fetch_missing_reports(
     entries = lookback_entries(fetch_archive_entries())
     wanted = [e for e in entries if e.pdf_url not in known_pdfs]
     if not wanted:
-        print("No new Page 1 PDFs in the 14-day lookback.")
+        print(f"No new Page 1 PDFs in the {LOOKBACK_DAYS}-day lookback.")
         return []
 
     def _run(session: requests.Session) -> list[DayReport]:
@@ -478,6 +480,11 @@ def fetch_missing_reports(
                     f"shed {report.evening_peak.load_shed_mw:.0f} MW"
                 )
                 reports.append(report)
+            except requests.exceptions.SSLError:
+                # Verified TLS fails on BPDB's incomplete chain. Re-raise so
+                # _with_tls retries this batch once without certificate checks.
+                # Catching it here used to skip every new PDF and exit 0.
+                raise
             except Exception as exc:
                 print(f"  ! skip ({exc})", flush=True)
             if i != len(wanted) - 1:
