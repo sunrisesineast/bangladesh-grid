@@ -2,7 +2,7 @@
   "source": "https://erp.powergrid.gov.bd/w/generations/view_generations",
   "source_name": "Power Grid Bangladesh PLC",
   "timezone": "Asia/Dhaka",
-  "updated_at": "2026-10-15T02:42:27+06:00",
+  "updated_at": "2026-10-15T10:37:25+06:00",
   "months": [
     {
       "month": "2015-04",
@@ -2077,16 +2077,16 @@
     {
       "month": "2026-10",
       "n": 15,
-      "generation_mw": 14353.46,
-      "gas": 4928.72,
-      "liquid_fuel": 2667.31,
-      "coal": 4969.94,
-      "hydro": 210.91,
-      "solar": 177.28,
-      "wind": 1.24,
-      "bheramara": 690.18,
-      "tripura": 67.58,
-      "adani": 639.98,
+      "generation_mw": 14340.72,
+      "gas": 4920.95,
+      "liquid_fuel": 2672.35,
+      "coal": 4966.76,
+      "hydro": 211.06,
+      "solar": 174.31,
+      "wind": 1.22,
+      "bheramara": 684.2,
+      "tripura": 67.63,
+      "adani": 641.94,
       "nepal": 0.0
     }
   ]
