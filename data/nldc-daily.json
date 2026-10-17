@@ -2,7 +2,7 @@
   "source": "https://misc.bpdb.gov.bd/daily-generation-archive",
   "source_name": "NLDC System Summary Report (via BPDB)",
   "timezone": "Asia/Dhaka",
-  "updated_at": "2026-10-15T20:05:53+06:00",
+  "updated_at": "2026-10-17T18:53:26+06:00",
   "days": [
     {
       "date": "2026-09-04",
@@ -2683,6 +2683,140 @@
           "demand_mw": 992.0
         }
       ]
+    },
+    {
+      "date": "2026-10-15",
+      "source_pdf": "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261016_20261017101355.pdf",
+      "day_peak": {
+        "generation_mw": 14519.18,
+        "demand_mw": 16325.18,
+        "time": "12:00"
+      },
+      "evening_peak": {
+        "generation_mw": 16089.75,
+        "demand_mw": 17791.39,
+        "load_shed_mw": 1140.0,
+        "time": "21:00"
+      },
+      "energy": {
+        "generated_gwh": 350.239,
+        "demand_gwh": 389.417,
+        "unserved_gwh": 39.178
+      },
+      "zones": [
+        {
+          "zone": "Dhaka",
+          "load_shed_mw": 159.0,
+          "demand_mw": 6212.0
+        },
+        {
+          "zone": "Chattogram",
+          "load_shed_mw": 125.0,
+          "demand_mw": 1625.0
+        },
+        {
+          "zone": "Cumilla",
+          "load_shed_mw": 140.0,
+          "demand_mw": 1639.0
+        },
+        {
+          "zone": "Mymensingh",
+          "load_shed_mw": 106.0,
+          "demand_mw": 1288.0
+        },
+        {
+          "zone": "Sylhet",
+          "load_shed_mw": 155.0,
+          "demand_mw": 771.0
+        },
+        {
+          "zone": "Khulna",
+          "load_shed_mw": 229.0,
+          "demand_mw": 1967.0
+        },
+        {
+          "zone": "Barishal",
+          "load_shed_mw": 82.0,
+          "demand_mw": 540.0
+        },
+        {
+          "zone": "Rajshahi",
+          "load_shed_mw": 141.0,
+          "demand_mw": 1667.0
+        },
+        {
+          "zone": "Rangpur",
+          "load_shed_mw": 3.0,
+          "demand_mw": 895.0
+        }
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "source_pdf": "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261017_20261017115328.pdf",
+      "day_peak": {
+        "generation_mw": 13942.68,
+        "demand_mw": 13942.68,
+        "time": "12:00"
+      },
+      "evening_peak": {
+        "generation_mw": 15405.11,
+        "demand_mw": 15696.11,
+        "load_shed_mw": 278.0,
+        "time": "19:00"
+      },
+      "energy": {
+        "generated_gwh": 340.725,
+        "demand_gwh": 350.674,
+        "unserved_gwh": 9.949
+      },
+      "zones": [
+        {
+          "zone": "Dhaka",
+          "load_shed_mw": 12.0,
+          "demand_mw": 5379.0
+        },
+        {
+          "zone": "Chattogram",
+          "load_shed_mw": 0.0,
+          "demand_mw": 1512.0
+        },
+        {
+          "zone": "Cumilla",
+          "load_shed_mw": 0.0,
+          "demand_mw": 1516.0
+        },
+        {
+          "zone": "Mymensingh",
+          "load_shed_mw": 133.0,
+          "demand_mw": 1125.0
+        },
+        {
+          "zone": "Sylhet",
+          "load_shed_mw": 133.0,
+          "demand_mw": 733.0
+        },
+        {
+          "zone": "Khulna",
+          "load_shed_mw": 0.0,
+          "demand_mw": 1789.0
+        },
+        {
+          "zone": "Barishal",
+          "load_shed_mw": 0.0,
+          "demand_mw": 472.0
+        },
+        {
+          "zone": "Rajshahi",
+          "load_shed_mw": 0.0,
+          "demand_mw": 1528.0
+        },
+        {
+          "zone": "Rangpur",
+          "load_shed_mw": 0.0,
+          "demand_mw": 898.0
+        }
+      ]
     }
   ],
   "fetched_pdfs": [
@@ -2726,6 +2860,8 @@
     "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261012_20261013122816.pdf",
     "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261013_20261013125015.pdf",
     "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261014_20261014120525.pdf",
-    "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261015_20261015141316.pdf"
+    "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261015_20261015141316.pdf",
+    "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261016_20261017101355.pdf",
+    "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261017_20261017115328.pdf"
   ]
 }
