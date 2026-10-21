@@ -334,6 +334,22 @@ footer {
   min-height: 16rem;
 }
 
+.chart-frame-solar-mix {
+  height: 18rem;
+  min-height: 16rem;
+}
+
+.solar-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.8rem 1rem;
+  margin: 0.2rem 0 1.2rem;
+}
+
+#solar-capacity .kicker {
+  margin-top: 0.4rem;
+}
+
 .chart-frame canvas {
   display: block;
   width: 100% !important;
@@ -603,6 +619,10 @@ footer {
   .nldc-pair,
   .focus-stats {
     grid-template-columns: 1fr;
+  }
+
+  .solar-stats {
+    grid-template-columns: 1fr 1fr;
   }
 
   .nldc-num,

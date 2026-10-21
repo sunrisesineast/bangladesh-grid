@@ -1,0 +1,38 @@
+name: Update SREDA solar capacity
+
+on:
+  schedule:
+    # 03:00 UTC on the 5th (09:00 Asia/Dhaka). The progress series is a
+    # month-start snapshot, so the check waits until that point should exist.
+    - cron: "0 3 5 * *"
+  workflow_dispatch:
+
+concurrency:
+  group: update-sreda
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install scraper
+        run: pip install -r requirements.txt
+      - name: Fetch SREDA solar register
+        run: python scripts/update_sreda.py
+      - name: Commit if the solar register moved
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/sreda-solar.json
+          if git diff --staged --quiet; then
+            echo "No SREDA change"
+          else
+            git commit -m "Update SREDA solar capacity"
+            git push
+          fi

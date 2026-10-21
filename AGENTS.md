@@ -24,15 +24,16 @@ Never commit `*.csv`, `*.xlsx`, or `*.pdf`. Never run a full ~2,000-page PGCB ba
 
 - Live generation: https://erp.powergrid.gov.bd/w/generations/view_generations (HTML table, `?page=N`). No official JSON API. Dispatched MW, Asia/Dhaka, including a 19:30 evening-peak row.
 - Live demand / load-shed: NLDC System Summary via https://misc.bpdb.gov.bd/daily-generation-archive (Page 1 PDF). Daily peaks, GWh generated/demand/unserved, nine-zone evening load-shed. Archive listing dates are often one day after the PDF’s report date; key rows on the PDF date. MKWHr is stored as GWh.
-- `data/latest.json` (48h hourly), `data/daily.json`, `data/monthly.json` are the generation store. `data/nldc-latest.json` and `data/nldc-daily.json` are the NLDC store. The site reads them at **build time**; `daily.json` is not copied to `public/`.
+- `data/latest.json` (48h hourly), `data/daily.json`, `data/monthly.json` are the generation store. `data/nldc-latest.json` and `data/nldc-daily.json` are the NLDC store. `data/sreda-solar.json` is the SREDA solar installed-capacity register (live technology split and month-start history). The site reads them at **build time**; `daily.json` is not copied to `public/`.
 - Hourly CI (`scripts/update.py`) fetches PGCB pages 1–2 and commits JSON only if the newest timestamp moved.
 - NLDC CI (`scripts/update_nldc.py`) fetches archive pages 1–2, downloads Page 1 PDFs in a 30-day lookback, upserts by report date, and commits only if a report was new or figures changed. Missing days stay gaps (do not invent zeros). Cron: 09:00 and 16:00 UTC (15:00 and 22:00 Asia/Dhaka). BPDB’s TLS chain is incomplete; PDF fetches must let that error reach the unverified retry. Swallowing it skips every new report and the workflow still succeeds.
+- SREDA CI (`scripts/update_sreda.py`) fetches the technology table and the progress chart, solar only, and commits only if the figures or the database timestamp moved. Cron: 03:00 UTC on the 5th (09:00 Asia/Dhaka). The progress series is a month-start snapshot and can revise downward; do not smooth those steps. Solar parks are the utility fleet closest to the PGCB solar column. Net-metered rooftop and off-grid systems are in the SREDA total and do not appear in that column.
 - Drop implausible hours and implausible NLDC totals. PGCB’s TLS chain is incomplete; on Linux, one verified failure then continue without verify is expected. BPDB may need the same.
 
 ## Product scope
 
-Phase 1 is `/` (hero MW, 48h, 7-day mix, monthly mix, plus an NLDC unserved / evening-shed strip that links to Demand).
+Phase 1 is `/` (hero MW, 48h, 7-day mix, monthly mix, plus an NLDC unserved / evening-shed strip that links to Demand). Isolating solar also shows the SREDA installed-capacity panel. That panel stays hidden for every other fuel.
 
 Phase 2 (in this repo) is `/demand`: evening-peak generation / demand / load-shed, daily GWh, nine-zone table, two history charts. Do not add production cost, gas MMCFD, unavailable plants, outage logs, zone fuel mix, maps, Ember, HCU/BPDB annual sales, Mendeley backfills, distco feeder schedules, or a workshop PDF archive unless asked.
 
-Keep the public site unofficial. Attribute PGCB on generation and NLDC/BPDB on demand. MIT covers code and JSON packaging, not the underlying grid figures.
+Keep the public site unofficial. Attribute PGCB on generation, NLDC/BPDB on demand, and SREDA on installed solar capacity. MIT covers code and JSON packaging, not the underlying grid figures.

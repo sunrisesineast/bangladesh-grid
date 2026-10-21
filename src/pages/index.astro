@@ -9,6 +9,9 @@ const monthly = JSON.parse(readFileSync("data/monthly.json", "utf8"));
 const nldc = existsSync("data/nldc-latest.json")
   ? JSON.parse(readFileSync("data/nldc-latest.json", "utf8"))
   : null;
+const sreda = existsSync("data/sreda-solar.json")
+  ? JSON.parse(readFileSync("data/sreda-solar.json", "utf8"))
+  : null;
 
 const current = latest.current;
 const days = (daily.days ?? []).slice(-8);
@@ -85,6 +88,22 @@ function fmtDate(iso: string) {
   }).format(dt);
 }
 
+function fmtCap(n: number) {
+  return Math.round(n).toLocaleString("en-US");
+}
+
+function fmtRegisterDate(iso: string | null | undefined) {
+  if (!iso) return "";
+  const [y, m, d] = iso.slice(0, 10).split("-").map(Number);
+  if (!y || !m || !d) return "";
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "UTC",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(Date.UTC(y, m - 1, d)));
+}
+
 function fmtGwh(n: number) {
   const digits = Math.abs(n) >= 10 ? 1 : 2;
   return n.toLocaleString("en-US", {
@@ -145,6 +164,18 @@ const chartData = {
     ...slimRow(d),
     month: String(d.month),
   })),
+  sreda: sreda
+    ? {
+        source: String(sreda.source),
+        source_name: String(sreda.source_name),
+        updated_at: String(sreda.updated_at),
+        database_updated_at: sreda.database_updated_at
+          ? String(sreda.database_updated_at)
+          : null,
+        current: sreda.current,
+        history: sreda.history ?? [],
+      }
+    : null,
 };
 ---
 
@@ -276,6 +307,61 @@ const chartData = {
       </section>
 
       {
+        sreda?.current ? (
+          <section id="solar-capacity" hidden aria-labelledby="h-solar">
+            <div class="section-head">
+              <h2 id="h-solar">Installed solar capacity</h2>
+            </div>
+            <p class="caption">
+              Nameplate capacity from the{" "}
+              <a href={sreda.source}>{sreda.source_name}</a>
+              {sreda.database_updated_at
+                ? `, live register ${fmtRegisterDate(sreda.database_updated_at)}`
+                : ""}
+              . This is not the dispatched megawatts in the charts below.
+            </p>
+            <div class="solar-stats">
+              <p class="nldc-stat">
+                <span class="nldc-num">{fmtCap(sreda.current.solar_mwp)}</span>
+                <span class="nldc-unit">MW installed</span>
+              </p>
+              <p class="nldc-stat">
+                <span class="nldc-num">{fmtCap(sreda.current.on_grid_mwp)}</span>
+                <span class="nldc-unit">MW on-grid</span>
+              </p>
+              <p class="nldc-stat">
+                <span class="nldc-num">{fmtCap(sreda.current.off_grid_mwp)}</span>
+                <span class="nldc-unit">MW off-grid</span>
+              </p>
+              <p class="nldc-stat">
+                <span class="nldc-num">{fmtCap(sreda.current.parks_mwp)}</span>
+                <span class="nldc-unit">MW solar parks</span>
+              </p>
+            </div>
+            <p class="kicker">Where it sits</p>
+            <p class="caption">
+              Solar parks are the utility plants closest to the PGCB solar
+              column. Net-metered rooftop is on a distribution network and does
+              not appear in that column. Home systems and most irrigation are
+              off-grid.
+            </p>
+            <div class="chart-frame chart-frame-solar-mix">
+              <canvas id="chart-solar-mix"></canvas>
+            </div>
+            <p class="kicker">Register since 2016</p>
+            <p class="caption" id="caption-solar-history">
+              Month-start snapshots of on-grid and off-grid capacity. The
+              latest point can sit below the live total above. A downward step
+              is SREDA revising the register.
+            </p>
+            <div class="chart-frame chart-frame-short">
+              <canvas id="chart-solar-history"></canvas>
+            </div>
+          </section>
+        ) : null
+      }
+
+      {
         nldcCurrent ? (
           <section class="nldc-strip" aria-labelledby="nldc-strip-label">
             <a class="nldc-strip-link" href="/demand">
@@ -381,7 +467,12 @@ const chartData = {
           {latest.source_name} generation table
         </a>
         . Figures are dispatched generation in MW, Asia/Dhaka, not billed
-        consumption. Daily demand and load-shedding are on the{" "}
+        consumption. Installed solar capacity, shown when solar is isolated,
+        is from the{" "}
+        <a href="https://www.renewableenergy.gov.bd/">
+          SREDA national renewable database
+        </a>
+        . Daily demand and load-shedding are on the{" "}
         <a href="/demand">Demand</a> page, from the NLDC summary.
       </p>
       <p class="muted">

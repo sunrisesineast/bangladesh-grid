@@ -13,6 +13,7 @@ Generation (`/`):
 - Last 7 days of daily-mean mix
 - Monthly mix for the seeded archive (2015–present)
 - A strip for yesterday’s NLDC unserved energy and evening load-shed, linking to Demand
+- Installed solar capacity from the SREDA national database, shown only when solar is isolated: live total, on-grid / off-grid / solar parks, and the register since 2016
 
 Demand (`/demand`):
 
@@ -49,13 +50,19 @@ Daily NLDC refresh (archive pages 1–2, 30-day lookback):
 python scripts/update_nldc.py
 ```
 
+SREDA solar capacity (live technology table and the month-start history):
+
+```bash
+python scripts/update_sreda.py
+```
+
 ## How updates work
 
-A GitHub Action runs at 15 minutes past each hour, fetches the newest PGCB pages, and commits generation JSON **only if the newest timestamp changed**. A second Action runs at 15:00 and 22:00 Bangladesh time, downloads recent NLDC Page 1 PDFs, and commits `data/nldc-*.json` only if a report was new or changed. Vercel rebuilds from those commits.
+A GitHub Action runs at 15 minutes past each hour, fetches the newest PGCB pages, and commits generation JSON **only if the newest timestamp changed**. A second Action runs at 15:00 and 22:00 Bangladesh time, downloads recent NLDC Page 1 PDFs, and commits `data/nldc-*.json` only if a report was new or changed. A third Action runs on the 5th of each month (09:00 Bangladesh time), fetches SREDA’s solar register, and commits `data/sreda-solar.json` only if the figures or the register timestamp moved. Vercel rebuilds from those commits.
 
 Connect this GitHub repo to a Vercel Hobby project (root directory `.`, framework Astro). Public Actions minutes are free; the workflows do not run on their own JSON commits, so they will not loop.
 
-Scheduled workflows on public repos pause after 60 days with no repository activity. JSON commits normally keep the schedules alive. If it goes quiet, run **Update generation data** or **Update NLDC demand data** from the Actions tab.
+Scheduled workflows on public repos pause after 60 days with no repository activity. JSON commits normally keep the schedules alive. If it goes quiet, run **Update generation data**, **Update NLDC demand data**, or **Update SREDA solar capacity** from the Actions tab.
 
 ## Related repo
 
@@ -63,4 +70,4 @@ The full hourly scrape, analysis scripts, and written report live in a separate 
 
 ## License
 
-[MIT](LICENSE) for the code and JSON packaging. Underlying figures remain PGCB / NLDC / BPDB public data; we do not claim to relicense them.
+[MIT](LICENSE) for the code and JSON packaging. Underlying figures remain PGCB / NLDC / BPDB / SREDA public data; we do not claim to relicense them.

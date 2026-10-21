@@ -1,0 +1,381 @@
+{
+  "source": "https://www.renewableenergy.gov.bd/",
+  "source_name": "SREDA National Database of Renewable Energy",
+  "timezone": "Asia/Dhaka",
+  "updated_at": "2026-10-20T16:23:32+06:00",
+  "database_updated_at": "2026-10-19T19:45:43+06:00",
+  "current": {
+    "solar_mwp": 1642.7,
+    "on_grid_mwp": 1259.425,
+    "off_grid_mwp": 383.275,
+    "parks_mwp": 745.25,
+    "technologies": [
+      {
+        "key": "solar_park",
+        "label": "Solar parks",
+        "quantity": 14,
+        "off_grid_mwp": 0.0,
+        "on_grid_mwp": 745.25,
+        "total_mwp": 745.25
+      },
+      {
+        "key": "rooftop",
+        "label": "Other rooftop",
+        "quantity": 455,
+        "off_grid_mwp": 33.357,
+        "on_grid_mwp": 60.159,
+        "total_mwp": 93.516
+      },
+      {
+        "key": "net_metering",
+        "label": "Net-metered rooftop",
+        "quantity": 5130,
+        "off_grid_mwp": 0.0,
+        "on_grid_mwp": 449.947,
+        "total_mwp": 449.947
+      },
+      {
+        "key": "irrigation",
+        "label": "Irrigation",
+        "quantity": 3435,
+        "off_grid_mwp": 54.922,
+        "on_grid_mwp": 4.053,
+        "total_mwp": 58.975
+      },
+      {
+        "key": "home_system",
+        "label": "Home systems",
+        "quantity": 6037583,
+        "off_grid_mwp": 263.657,
+        "on_grid_mwp": 0.0,
+        "total_mwp": 263.657
+      },
+      {
+        "key": "minigrid",
+        "label": "Minigrids",
+        "quantity": 28,
+        "off_grid_mwp": 5.805,
+        "on_grid_mwp": 0.0,
+        "total_mwp": 5.805
+      },
+      {
+        "key": "nanogrid",
+        "label": "Nanogrids",
+        "quantity": 2,
+        "off_grid_mwp": 0.001,
+        "on_grid_mwp": 0.0,
+        "total_mwp": 0.001
+      },
+      {
+        "key": "charging",
+        "label": "Charging stations",
+        "quantity": 15,
+        "off_grid_mwp": 0.275,
+        "on_grid_mwp": 0.016,
+        "total_mwp": 0.291
+      },
+      {
+        "key": "street_light",
+        "label": "Street lights",
+        "quantity": 297691,
+        "off_grid_mwp": 17.104,
+        "on_grid_mwp": 0.0,
+        "total_mwp": 17.104
+      },
+      {
+        "key": "telecom",
+        "label": "Telecom",
+        "quantity": 1933,
+        "off_grid_mwp": 8.06,
+        "on_grid_mwp": 0.0,
+        "total_mwp": 8.06
+      },
+      {
+        "key": "drinking_water",
+        "label": "Drinking water",
+        "quantity": 82,
+        "off_grid_mwp": 0.095,
+        "on_grid_mwp": 0.0,
+        "total_mwp": 0.095
+      }
+    ]
+  },
+  "history": [
+    {
+      "date": "2016-07-01",
+      "solar_mw": 166.27,
+      "on_grid_mw": 0.0,
+      "off_grid_mw": 166.27
+    },
+    {
+      "date": "2017-07-01",
+      "solar_mw": 209.88,
+      "on_grid_mw": 10.86,
+      "off_grid_mw": 199.02
+    },
+    {
+      "date": "2018-07-01",
+      "solar_mw": 284.0,
+      "on_grid_mw": 17.0,
+      "off_grid_mw": 267.0
+    },
+    {
+      "date": "2019-07-01",
+      "solar_mw": 352.11,
+      "on_grid_mw": 56.37,
+      "off_grid_mw": 295.74
+    },
+    {
+      "date": "2020-07-01",
+      "solar_mw": 416.22,
+      "on_grid_mw": 88.28,
+      "off_grid_mw": 327.98
+    },
+    {
+      "date": "2021-07-01",
+      "solar_mw": 532.5,
+      "on_grid_mw": 194.89,
+      "off_grid_mw": 346.95
+    },
+    {
+      "date": "2022-07-01",
+      "solar_mw": 656.68,
+      "on_grid_mw": 302.35,
+      "off_grid_mw": 354.33
+    },
+    {
+      "date": "2023-06-14",
+      "solar_mw": 949.643,
+      "on_grid_mw": 584.129,
+      "off_grid_mw": 365.514
+    },
+    {
+      "date": "2023-07-01",
+      "solar_mw": 949.665,
+      "on_grid_mw": 584.151,
+      "off_grid_mw": 365.514
+    },
+    {
+      "date": "2023-10-01",
+      "solar_mw": 960.042,
+      "on_grid_mw": 594.34,
+      "off_grid_mw": 365.701
+    },
+    {
+      "date": "2023-11-01",
+      "solar_mw": 960.712,
+      "on_grid_mw": 594.644,
+      "off_grid_mw": 366.069
+    },
+    {
+      "date": "2023-12-01",
+      "solar_mw": 966.787,
+      "on_grid_mw": 600.062,
+      "off_grid_mw": 366.725
+    },
+    {
+      "date": "2024-01-01",
+      "solar_mw": 967.785,
+      "on_grid_mw": 601.022,
+      "off_grid_mw": 366.763
+    },
+    {
+      "date": "2024-02-01",
+      "solar_mw": 968.482,
+      "on_grid_mw": 601.689,
+      "off_grid_mw": 366.793
+    },
+    {
+      "date": "2024-03-01",
+      "solar_mw": 971.799,
+      "on_grid_mw": 604.986,
+      "off_grid_mw": 366.813
+    },
+    {
+      "date": "2024-04-01",
+      "solar_mw": 988.917,
+      "on_grid_mw": 618.129,
+      "off_grid_mw": 370.788
+    },
+    {
+      "date": "2024-05-01",
+      "solar_mw": 993.991,
+      "on_grid_mw": 622.281,
+      "off_grid_mw": 371.71
+    },
+    {
+      "date": "2024-06-01",
+      "solar_mw": 1075.06,
+      "on_grid_mw": 703.335,
+      "off_grid_mw": 371.721
+    },
+    {
+      "date": "2024-07-01",
+      "solar_mw": 1079.82,
+      "on_grid_mw": 705.992,
+      "off_grid_mw": 373.823
+    },
+    {
+      "date": "2024-08-01",
+      "solar_mw": 1080.36,
+      "on_grid_mw": 706.519,
+      "off_grid_mw": 373.843
+    },
+    {
+      "date": "2024-09-01",
+      "solar_mw": 1084.49,
+      "on_grid_mw": 707.406,
+      "off_grid_mw": 377.083
+    },
+    {
+      "date": "2024-10-15",
+      "solar_mw": 1084.49,
+      "on_grid_mw": 707.406,
+      "off_grid_mw": 377.083
+    },
+    {
+      "date": "2024-11-01",
+      "solar_mw": 1084.55,
+      "on_grid_mw": 707.469,
+      "off_grid_mw": 377.083
+    },
+    {
+      "date": "2024-12-01",
+      "solar_mw": 1153.93,
+      "on_grid_mw": 776.845,
+      "off_grid_mw": 377.088
+    },
+    {
+      "date": "2025-01-01",
+      "solar_mw": 1155.38,
+      "on_grid_mw": 778.285,
+      "off_grid_mw": 377.09
+    },
+    {
+      "date": "2025-02-01",
+      "solar_mw": 1256.57,
+      "on_grid_mw": 879.466,
+      "off_grid_mw": 377.104
+    },
+    {
+      "date": "2025-03-01",
+      "solar_mw": 1262.7,
+      "on_grid_mw": 885.57,
+      "off_grid_mw": 377.127
+    },
+    {
+      "date": "2025-04-01",
+      "solar_mw": 1264.31,
+      "on_grid_mw": 887.165,
+      "off_grid_mw": 377.146
+    },
+    {
+      "date": "2025-05-01",
+      "solar_mw": 1265.27,
+      "on_grid_mw": 888.118,
+      "off_grid_mw": 377.148
+    },
+    {
+      "date": "2025-06-01",
+      "solar_mw": 1268.77,
+      "on_grid_mw": 891.622,
+      "off_grid_mw": 377.148
+    },
+    {
+      "date": "2025-07-01",
+      "solar_mw": 1270.37,
+      "on_grid_mw": 893.225,
+      "off_grid_mw": 377.148
+    },
+    {
+      "date": "2025-08-01",
+      "solar_mw": 1322.34,
+      "on_grid_mw": 945.324,
+      "off_grid_mw": 377.011
+    },
+    {
+      "date": "2025-09-01",
+      "solar_mw": 1373.44,
+      "on_grid_mw": 996.393,
+      "off_grid_mw": 377.051
+    },
+    {
+      "date": "2025-10-01",
+      "solar_mw": 1339.29,
+      "on_grid_mw": 962.146,
+      "off_grid_mw": 377.14
+    },
+    {
+      "date": "2025-11-01",
+      "solar_mw": 1253.85,
+      "on_grid_mw": 876.679,
+      "off_grid_mw": 377.168
+    },
+    {
+      "date": "2025-12-01",
+      "solar_mw": 1396.34,
+      "on_grid_mw": 1019.18,
+      "off_grid_mw": 377.168
+    },
+    {
+      "date": "2026-01-01",
+      "solar_mw": 1397.54,
+      "on_grid_mw": 1020.37,
+      "off_grid_mw": 377.168
+    },
+    {
+      "date": "2026-02-01",
+      "solar_mw": 1401.41,
+      "on_grid_mw": 1024.24,
+      "off_grid_mw": 377.168
+    },
+    {
+      "date": "2026-03-01",
+      "solar_mw": 1401.85,
+      "on_grid_mw": 1024.68,
+      "off_grid_mw": 377.172
+    },
+    {
+      "date": "2026-04-01",
+      "solar_mw": 1403.84,
+      "on_grid_mw": 1026.66,
+      "off_grid_mw": 377.172
+    },
+    {
+      "date": "2026-05-01",
+      "solar_mw": 1450.67,
+      "on_grid_mw": 1073.5,
+      "off_grid_mw": 377.172
+    },
+    {
+      "date": "2026-06-01",
+      "solar_mw": 1488.0,
+      "on_grid_mw": 1110.56,
+      "off_grid_mw": 377.433
+    },
+    {
+      "date": "2026-07-01",
+      "solar_mw": 1512.98,
+      "on_grid_mw": 1135.54,
+      "off_grid_mw": 377.433
+    },
+    {
+      "date": "2026-08-01",
+      "solar_mw": 1529.13,
+      "on_grid_mw": 1151.66,
+      "off_grid_mw": 377.469
+    },
+    {
+      "date": "2026-09-01",
+      "solar_mw": 1533.87,
+      "on_grid_mw": 1156.4,
+      "off_grid_mw": 377.469
+    },
+    {
+      "date": "2026-10-01",
+      "solar_mw": 1570.98,
+      "on_grid_mw": 1193.51,
+      "off_grid_mw": 377.469
+    }
+  ]
+}

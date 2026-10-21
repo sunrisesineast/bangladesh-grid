@@ -12,6 +12,7 @@ import {
   Tooltip,
 } from "chart.js";
 import type { ChartDataset, ScriptableContext } from "chart.js";
+import { mountSolar, setSolarVisible, type SredaSolar } from "./solar.ts";
 
 Chart.register(
   BarController,
@@ -50,6 +51,7 @@ export type GridData = {
   last7: SeriesRow[];
   prevDay: SeriesRow | null;
   months: SeriesRow[];
+  sreda: SredaSolar | null;
 };
 
 type FuelKey =
@@ -724,6 +726,7 @@ function syncDom() {
   syncReadout();
   syncInspect();
   applyFuelButtonState();
+  setSolarVisible(state.focus === "solar");
 }
 
 function syncReadout() {
@@ -941,6 +944,7 @@ function commonOptions(onClick: Chart["options"]["onClick"]) {
 
 export function renderCharts(payload: GridData) {
   data = payload;
+  mountSolar(payload.sreda ?? null);
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     Chart.defaults.animation = false;
   }
