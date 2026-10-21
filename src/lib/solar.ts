@@ -61,16 +61,31 @@ const PARKS = "#8a6e12";
 const OFF = "#c4b496";
 const GRID = "#e6e0d6";
 const OTHER_MIN = 8;
-const YEAR_LABELS = new Set(["2016", "2020", "2024", "2026"]);
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+// SREDA's progress chart is one point a year until this date, then monthly.
+const MONTHLY_FROM = "2023-10-01";
 
-function yearTickIndexes(dates: string[]): Set<number> {
-  const show = new Set<number>();
+function historyTickLabels(dates: string[]): Map<number, string> {
+  const labels = new Map<number, string>();
+  let last = -100;
+  const put = (index: number, text: string, minGap: number) => {
+    if (index - last < minGap) return;
+    labels.set(index, text);
+    last = index;
+  };
   dates.forEach((date, index) => {
-    const year = date.slice(0, 4);
-    const prev = index > 0 ? dates[index - 1].slice(0, 4) : "";
-    if (year !== prev && YEAR_LABELS.has(year)) show.add(index);
+    const [year, month] = date.split("-");
+    const monthNum = Number(month);
+    if (date < MONTHLY_FROM) {
+      if (year === "2016" || year === "2020") put(index, year, 1);
+      return;
+    }
+    const isLast = index === dates.length - 1;
+    if (monthNum === 1) put(index, `Jan ${year}`, 4);
+    else if (monthNum === 7) put(index, "Jul", 4);
+    else if (isLast) put(index, `${MONTHS[monthNum - 1]} ${year}`, 4);
   });
-  return show;
+  return labels;
 }
 
 let payload: SredaSolar | null = null;
@@ -116,7 +131,7 @@ function buildCharts() {
 
   const history = payload.history;
   const dates = history.map((point) => point.date);
-  const yearTicks = yearTickIndexes(dates);
+  const tickLabels = historyTickLabels(dates);
   historyChart = new Chart(historyEl, {
     type: "line",
     data: {
@@ -175,7 +190,7 @@ function buildCharts() {
             maxRotation: 0,
             autoSkip: false,
             callback(value) {
-              return yearTicks.has(Number(value)) ? dates[Number(value)].slice(0, 4) : "";
+              return tickLabels.get(Number(value)) ?? "";
             },
           },
           grid: { color: GRID },
