@@ -2,66 +2,66 @@
   "source": "https://misc.bpdb.gov.bd/daily-generation-archive",
   "source_name": "NLDC System Summary Report (via BPDB)",
   "timezone": "Asia/Dhaka",
-  "updated_at": "2026-11-12T23:30:39+06:00",
+  "updated_at": "2026-11-15T22:13:53+06:00",
   "current": {
-    "date": "2026-11-11",
-    "source_pdf": "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261112_20261112132138.pdf",
+    "date": "2026-11-14",
+    "source_pdf": "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261115_20261115154602.pdf",
     "day_peak": {
-      "generation_mw": 12550.1,
-      "demand_mw": 12550.1,
+      "generation_mw": 11076.72,
+      "demand_mw": 11076.72,
       "time": "12:00"
     },
     "evening_peak": {
-      "generation_mw": 14125.59,
-      "demand_mw": 14125.59,
+      "generation_mw": 13564.41,
+      "demand_mw": 13564.41,
       "load_shed_mw": 0.0,
-      "time": "18:00"
+      "time": "18:30"
     },
     "energy": {
-      "generated_gwh": 288.619,
-      "demand_gwh": 288.777,
-      "unserved_gwh": 0.158
+      "generated_gwh": 262.081,
+      "demand_gwh": 262.081,
+      "unserved_gwh": 0.0
     },
     "zones": [
       {
         "zone": "Dhaka",
         "load_shed_mw": 0.0,
-        "demand_mw": 5609.0
+        "demand_mw": 5152.0
       },
       {
         "zone": "Chattogram",
         "load_shed_mw": 0.0,
-        "demand_mw": 1459.0
+        "demand_mw": 1486.0
       },
       {
         "zone": "Cumilla",
         "load_shed_mw": 0.0,
-        "demand_mw": 1227.0
+        "demand_mw": 1131.0
       },
       {
         "zone": "Mymensingh",
         "load_shed_mw": 0.0,
-        "demand_mw": 1113.0
+        "demand_mw": 981.0
       },
       {
         "zone": "Sylhet",
         "load_shed_mw": 0.0,
-        "demand_mw": 522.0
+        "demand_mw": 514.0
       },
       {
         "zone": "Khulna",
         "load_shed_mw": 0.0,
-        "demand_mw": 1508.0
+        "demand_mw": 1399.0
       },
       {
         "zone": "Barishal",
         "load_shed_mw": 0.0,
-        "demand_mw": 421.0
+        "demand_mw": 356.0
       },
       {
         "zone": "Rajshahi",
         "load_shed_mw": 0.0,
-        "demand_mw": 1259.0
+        "demand_mw": 1156.0
       },
       {
         "zone": "Rangpur",
