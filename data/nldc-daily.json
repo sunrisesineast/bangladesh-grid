@@ -2,7 +2,7 @@
   "source": "https://misc.bpdb.gov.bd/daily-generation-archive",
   "source_name": "NLDC System Summary Report (via BPDB)",
   "timezone": "Asia/Dhaka",
-  "updated_at": "2026-11-17T01:29:22+06:00",
+  "updated_at": "2026-11-18T00:23:59+06:00",
   "days": [
     {
       "date": "2026-09-04",
@@ -4827,6 +4827,73 @@
           "demand_mw": 782.0
         }
       ]
+    },
+    {
+      "date": "2026-11-16",
+      "source_pdf": "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261117_20261117152925.pdf",
+      "day_peak": {
+        "generation_mw": 11979.8,
+        "demand_mw": 11979.8,
+        "time": "12:00"
+      },
+      "evening_peak": {
+        "generation_mw": 13633.26,
+        "demand_mw": 13633.26,
+        "load_shed_mw": 0.0,
+        "time": "18:00"
+      },
+      "energy": {
+        "generated_gwh": 277.503,
+        "demand_gwh": 277.503,
+        "unserved_gwh": 0.0
+      },
+      "zones": [
+        {
+          "zone": "Dhaka",
+          "load_shed_mw": 0.0,
+          "demand_mw": 5461.0
+        },
+        {
+          "zone": "Chattogram",
+          "load_shed_mw": 0.0,
+          "demand_mw": 1397.0
+        },
+        {
+          "zone": "Cumilla",
+          "load_shed_mw": 0.0,
+          "demand_mw": 1165.0
+        },
+        {
+          "zone": "Mymensingh",
+          "load_shed_mw": 0.0,
+          "demand_mw": 976.0
+        },
+        {
+          "zone": "Sylhet",
+          "load_shed_mw": 0.0,
+          "demand_mw": 504.0
+        },
+        {
+          "zone": "Khulna",
+          "load_shed_mw": 0.0,
+          "demand_mw": 1475.0
+        },
+        {
+          "zone": "Barishal",
+          "load_shed_mw": 0.0,
+          "demand_mw": 365.0
+        },
+        {
+          "zone": "Rajshahi",
+          "load_shed_mw": 0.0,
+          "demand_mw": 1184.0
+        },
+        {
+          "zone": "Rangpur",
+          "load_shed_mw": 0.0,
+          "demand_mw": 811.0
+        }
+      ]
     }
   ],
   "fetched_pdfs": [
@@ -4903,6 +4970,7 @@
     "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261113_20261115102401.pdf",
     "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261114_20261115105249.pdf",
     "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261115_20261115154602.pdf",
-    "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261116_20261116122236.pdf"
+    "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261116_20261116122236.pdf",
+    "https://misc.bpdb.gov.bd/storage/daily_archive/page_1_20261117_20261117152925.pdf"
   ]
 }
