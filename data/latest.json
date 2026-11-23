@@ -2,203 +2,23 @@
   "source": "https://erp.powergrid.gov.bd/w/generations/view_generations",
   "source_name": "Power Grid Bangladesh PLC",
   "timezone": "Asia/Dhaka",
-  "updated_at": "2026-11-23T01:37:45+06:00",
+  "updated_at": "2026-11-23T15:02:49+06:00",
   "current": {
-    "datetime": "2026-11-23T00:00:00+06:00",
-    "generation_mw": 11244.0,
-    "gas": 4694.0,
-    "liquid_fuel": 95.0,
-    "coal": 4369.0,
+    "datetime": "2026-11-23T12:00:00+06:00",
+    "generation_mw": 11932.0,
+    "gas": 4922.0,
+    "liquid_fuel": 276.0,
+    "coal": 3884.0,
     "hydro": 40.0,
-    "solar": 0.0,
+    "solar": 516.0,
     "wind": 0.0,
-    "bheramara": 931.0,
-    "tripura": 100.0,
-    "adani": 1015.0,
-    "nepal": 0.0,
-    "remark": ""
+    "bheramara": 234.0,
+    "tripura": 902.0,
+    "adani": 122.0,
+    "nepal": 1036.0,
+    "remark": "0"
   },
   "hourly": [
-    {
-      "datetime": "2026-11-21T00:00:00+06:00",
-      "generation_mw": 9387.0,
-      "gas": 4349.0,
-      "liquid_fuel": 0.0,
-      "coal": 3156.0,
-      "hydro": 40.0,
-      "solar": 0.0,
-      "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 78.0,
-      "adani": 833.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T01:00:00+06:00",
-      "generation_mw": 8857.0,
-      "gas": 4005.0,
-      "liquid_fuel": 0.0,
-      "coal": 2976.0,
-      "hydro": 40.0,
-      "solar": 0.0,
-      "wind": 1.0,
-      "bheramara": 931.0,
-      "tripura": 70.0,
-      "adani": 834.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T02:00:00+06:00",
-      "generation_mw": 8441.0,
-      "gas": 3821.0,
-      "liquid_fuel": 0.0,
-      "coal": 2767.0,
-      "hydro": 40.0,
-      "solar": 0.0,
-      "wind": 1.0,
-      "bheramara": 931.0,
-      "tripura": 66.0,
-      "adani": 815.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T03:00:00+06:00",
-      "generation_mw": 8192.0,
-      "gas": 3616.0,
-      "liquid_fuel": 0.0,
-      "coal": 2739.0,
-      "hydro": 30.0,
-      "solar": 0.0,
-      "wind": 8.0,
-      "bheramara": 931.0,
-      "tripura": 70.0,
-      "adani": 798.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T04:00:00+06:00",
-      "generation_mw": 7839.0,
-      "gas": 3442.0,
-      "liquid_fuel": 0.0,
-      "coal": 2545.0,
-      "hydro": 30.0,
-      "solar": 0.0,
-      "wind": 12.0,
-      "bheramara": 931.0,
-      "tripura": 70.0,
-      "adani": 809.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T05:00:00+06:00",
-      "generation_mw": 7841.0,
-      "gas": 3510.0,
-      "liquid_fuel": 0.0,
-      "coal": 2479.0,
-      "hydro": 30.0,
-      "solar": 0.0,
-      "wind": 18.0,
-      "bheramara": 931.0,
-      "tripura": 62.0,
-      "adani": 811.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T06:00:00+06:00",
-      "generation_mw": 8015.0,
-      "gas": 3599.0,
-      "liquid_fuel": 0.0,
-      "coal": 2552.0,
-      "hydro": 30.0,
-      "solar": 0.0,
-      "wind": 32.0,
-      "bheramara": 931.0,
-      "tripura": 66.0,
-      "adani": 805.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T07:00:00+06:00",
-      "generation_mw": 8702.0,
-      "gas": 3918.0,
-      "liquid_fuel": 57.0,
-      "coal": 2819.0,
-      "hydro": 40.0,
-      "solar": 11.0,
-      "wind": 35.0,
-      "bheramara": 931.0,
-      "tripura": 62.0,
-      "adani": 829.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T08:00:00+06:00",
-      "generation_mw": 9755.0,
-      "gas": 4208.0,
-      "liquid_fuel": 184.0,
-      "coal": 3307.0,
-      "hydro": 40.0,
-      "solar": 47.0,
-      "wind": 19.0,
-      "bheramara": 931.0,
-      "tripura": 88.0,
-      "adani": 931.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T09:00:00+06:00",
-      "generation_mw": 10190.0,
-      "gas": 3927.0,
-      "liquid_fuel": 247.0,
-      "coal": 3755.0,
-      "hydro": 40.0,
-      "solar": 119.0,
-      "wind": 8.0,
-      "bheramara": 815.0,
-      "tripura": 96.0,
-      "adani": 1183.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T10:00:00+06:00",
-      "generation_mw": 10273.0,
-      "gas": 4038.0,
-      "liquid_fuel": 287.0,
-      "coal": 3611.0,
-      "hydro": 40.0,
-      "solar": 158.0,
-      "wind": 1.0,
-      "bheramara": 931.0,
-      "tripura": 98.0,
-      "adani": 1109.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
-    {
-      "datetime": "2026-11-21T11:00:00+06:00",
-      "generation_mw": 10631.0,
-      "gas": 4250.0,
-      "liquid_fuel": 284.0,
-      "coal": 3758.0,
-      "hydro": 40.0,
-      "solar": 133.0,
-      "wind": 3.0,
-      "bheramara": 931.0,
-      "tripura": 98.0,
-      "adani": 1134.0,
-      "nepal": 0.0,
-      "remark": ""
-    },
     {
       "datetime": "2026-11-21T12:00:00+06:00",
       "generation_mw": 11487.0,
@@ -208,11 +28,11 @@
       "hydro": 40.0,
       "solar": 137.0,
       "wind": 1.0,
-      "bheramara": 931.0,
-      "tripura": 110.0,
-      "adani": 1455.0,
-      "nepal": 0.0,
-      "remark": "Day Peak"
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 110.0,
+      "nepal": 1455.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T13:00:00+06:00",
@@ -223,11 +43,11 @@
       "hydro": 40.0,
       "solar": 112.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 110.0,
-      "adani": 1468.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 110.0,
+      "nepal": 1468.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T14:00:00+06:00",
@@ -238,11 +58,11 @@
       "hydro": 40.0,
       "solar": 130.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 108.0,
-      "adani": 1384.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 108.0,
+      "nepal": 1384.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T15:00:00+06:00",
@@ -253,11 +73,11 @@
       "hydro": 40.0,
       "solar": 106.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 102.0,
-      "adani": 1299.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 102.0,
+      "nepal": 1299.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T16:00:00+06:00",
@@ -268,11 +88,11 @@
       "hydro": 40.0,
       "solar": 52.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 102.0,
-      "adani": 1288.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 102.0,
+      "nepal": 1288.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T17:00:00+06:00",
@@ -283,11 +103,11 @@
       "hydro": 40.0,
       "solar": 1.0,
       "wind": 7.0,
-      "bheramara": 931.0,
-      "tripura": 98.0,
-      "adani": 1279.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 98.0,
+      "nepal": 1279.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T18:00:00+06:00",
@@ -298,11 +118,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 3.0,
-      "bheramara": 931.0,
-      "tripura": 104.0,
-      "adani": 1244.0,
-      "nepal": 0.0,
-      "remark": "Evening Peak"
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 104.0,
+      "nepal": 1244.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T18:30:00+06:00",
@@ -313,11 +133,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 1.0,
-      "bheramara": 931.0,
-      "tripura": 102.0,
-      "adani": 1204.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 102.0,
+      "nepal": 1204.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T19:00:00+06:00",
@@ -328,11 +148,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 106.0,
-      "adani": 1205.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 106.0,
+      "nepal": 1205.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T19:30:00+06:00",
@@ -343,11 +163,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 5.0,
-      "bheramara": 931.0,
-      "tripura": 102.0,
-      "adani": 1162.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 102.0,
+      "nepal": 1162.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T20:00:00+06:00",
@@ -358,11 +178,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 3.0,
-      "bheramara": 931.0,
-      "tripura": 96.0,
-      "adani": 1159.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 96.0,
+      "nepal": 1159.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T21:00:00+06:00",
@@ -373,11 +193,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 100.0,
-      "adani": 1150.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 100.0,
+      "nepal": 1150.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T22:00:00+06:00",
@@ -388,11 +208,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 2.0,
-      "bheramara": 931.0,
-      "tripura": 92.0,
-      "adani": 1073.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 92.0,
+      "nepal": 1073.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-21T23:00:00+06:00",
@@ -403,11 +223,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 94.0,
-      "adani": 1031.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 94.0,
+      "nepal": 1031.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T00:00:00+06:00",
@@ -418,11 +238,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 92.0,
-      "adani": 988.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 92.0,
+      "nepal": 988.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T01:00:00+06:00",
@@ -433,11 +253,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 84.0,
-      "adani": 897.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 84.0,
+      "nepal": 897.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T02:00:00+06:00",
@@ -448,11 +268,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 84.0,
-      "adani": 841.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 84.0,
+      "nepal": 841.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T03:00:00+06:00",
@@ -463,11 +283,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 76.0,
-      "adani": 834.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 76.0,
+      "nepal": 834.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T04:00:00+06:00",
@@ -478,11 +298,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 76.0,
-      "adani": 839.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 76.0,
+      "nepal": 839.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T05:00:00+06:00",
@@ -493,11 +313,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 80.0,
-      "adani": 842.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 80.0,
+      "nepal": 842.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T06:00:00+06:00",
@@ -508,11 +328,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 82.0,
-      "adani": 903.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 82.0,
+      "nepal": 903.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T07:00:00+06:00",
@@ -523,11 +343,11 @@
       "hydro": 40.0,
       "solar": 22.0,
       "wind": 0.0,
-      "bheramara": 930.0,
-      "tripura": 84.0,
-      "adani": 1049.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 930.0,
+      "adani": 84.0,
+      "nepal": 1049.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T08:00:00+06:00",
@@ -538,11 +358,11 @@
       "hydro": 40.0,
       "solar": 101.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 76.0,
-      "adani": 1161.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 76.0,
+      "nepal": 1161.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T09:00:00+06:00",
@@ -553,11 +373,11 @@
       "hydro": 40.0,
       "solar": 176.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 92.0,
-      "adani": 1193.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 92.0,
+      "nepal": 1193.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T10:00:00+06:00",
@@ -568,11 +388,11 @@
       "hydro": 40.0,
       "solar": 188.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 96.0,
-      "adani": 1115.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 96.0,
+      "nepal": 1115.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T11:00:00+06:00",
@@ -583,11 +403,11 @@
       "hydro": 40.0,
       "solar": 302.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 100.0,
-      "adani": 1187.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 100.0,
+      "nepal": 1187.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T12:00:00+06:00",
@@ -598,11 +418,11 @@
       "hydro": 40.0,
       "solar": 386.0,
       "wind": 3.0,
-      "bheramara": 931.0,
-      "tripura": 120.0,
-      "adani": 1207.0,
-      "nepal": 0.0,
-      "remark": "Day Peak"
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 120.0,
+      "nepal": 1207.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T13:00:00+06:00",
@@ -613,11 +433,11 @@
       "hydro": 40.0,
       "solar": 357.0,
       "wind": 4.0,
-      "bheramara": 931.0,
-      "tripura": 118.0,
-      "adani": 1192.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 118.0,
+      "nepal": 1192.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T14:00:00+06:00",
@@ -628,11 +448,11 @@
       "hydro": 40.0,
       "solar": 344.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 116.0,
-      "adani": 1121.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 116.0,
+      "nepal": 1121.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T15:00:00+06:00",
@@ -643,11 +463,11 @@
       "hydro": 40.0,
       "solar": 180.0,
       "wind": 0.0,
-      "bheramara": 930.0,
-      "tripura": 106.0,
-      "adani": 1104.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 930.0,
+      "adani": 106.0,
+      "nepal": 1104.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T16:00:00+06:00",
@@ -658,11 +478,11 @@
       "hydro": 40.0,
       "solar": 82.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 116.0,
-      "adani": 1111.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 116.0,
+      "nepal": 1111.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T17:00:00+06:00",
@@ -673,11 +493,11 @@
       "hydro": 40.0,
       "solar": 4.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 104.0,
-      "adani": 1133.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 104.0,
+      "nepal": 1133.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T18:00:00+06:00",
@@ -688,11 +508,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 112.0,
-      "adani": 1244.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 112.0,
+      "nepal": 1244.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T18:30:00+06:00",
@@ -703,11 +523,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 110.0,
-      "adani": 1262.0,
-      "nepal": 0.0,
-      "remark": "Evening Peak"
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 110.0,
+      "nepal": 1262.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T19:00:00+06:00",
@@ -718,11 +538,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 106.0,
-      "adani": 1293.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 106.0,
+      "nepal": 1293.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T19:30:00+06:00",
@@ -733,11 +553,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 1.0,
-      "bheramara": 931.0,
-      "tripura": 102.0,
-      "adani": 1347.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 102.0,
+      "nepal": 1347.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T20:00:00+06:00",
@@ -748,11 +568,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 104.0,
-      "adani": 1382.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 104.0,
+      "nepal": 1382.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T21:00:00+06:00",
@@ -763,11 +583,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 100.0,
-      "adani": 1398.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 100.0,
+      "nepal": 1398.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T22:00:00+06:00",
@@ -778,11 +598,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 98.0,
-      "adani": 1316.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 98.0,
+      "nepal": 1316.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-22T23:00:00+06:00",
@@ -793,11 +613,11 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 100.0,
-      "adani": 1213.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 100.0,
+      "nepal": 1213.0,
+      "remark": "0"
     },
     {
       "datetime": "2026-11-23T00:00:00+06:00",
@@ -808,11 +628,191 @@
       "hydro": 40.0,
       "solar": 0.0,
       "wind": 0.0,
-      "bheramara": 931.0,
-      "tripura": 100.0,
-      "adani": 1015.0,
-      "nepal": 0.0,
-      "remark": ""
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 100.0,
+      "nepal": 1015.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T01:00:00+06:00",
+      "generation_mw": 10446.0,
+      "gas": 4740.0,
+      "liquid_fuel": 67.0,
+      "coal": 3756.0,
+      "hydro": 40.0,
+      "solar": 0.0,
+      "wind": 0.0,
+      "bheramara": 0.0,
+      "tripura": 930.0,
+      "adani": 98.0,
+      "nepal": 815.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T02:00:00+06:00",
+      "generation_mw": 10035.0,
+      "gas": 4743.0,
+      "liquid_fuel": 67.0,
+      "coal": 3333.0,
+      "hydro": 40.0,
+      "solar": 0.0,
+      "wind": 0.0,
+      "bheramara": 0.0,
+      "tripura": 931.0,
+      "adani": 94.0,
+      "nepal": 827.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T03:00:00+06:00",
+      "generation_mw": 9675.0,
+      "gas": 4622.0,
+      "liquid_fuel": 65.0,
+      "coal": 3142.0,
+      "hydro": 40.0,
+      "solar": 0.0,
+      "wind": 0.0,
+      "bheramara": 0.0,
+      "tripura": 902.0,
+      "adani": 86.0,
+      "nepal": 818.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T04:00:00+06:00",
+      "generation_mw": 9428.0,
+      "gas": 4416.0,
+      "liquid_fuel": 33.0,
+      "coal": 3126.0,
+      "hydro": 40.0,
+      "solar": 0.0,
+      "wind": 0.0,
+      "bheramara": 0.0,
+      "tripura": 902.0,
+      "adani": 86.0,
+      "nepal": 825.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T05:00:00+06:00",
+      "generation_mw": 9301.0,
+      "gas": 4332.0,
+      "liquid_fuel": 25.0,
+      "coal": 3075.0,
+      "hydro": 40.0,
+      "solar": 0.0,
+      "wind": 9.0,
+      "bheramara": 0.0,
+      "tripura": 902.0,
+      "adani": 92.0,
+      "nepal": 826.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T06:00:00+06:00",
+      "generation_mw": 9416.0,
+      "gas": 4166.0,
+      "liquid_fuel": 34.0,
+      "coal": 3289.0,
+      "hydro": 40.0,
+      "solar": 0.0,
+      "wind": 6.0,
+      "bheramara": 0.0,
+      "tripura": 902.0,
+      "adani": 86.0,
+      "nepal": 893.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T07:00:00+06:00",
+      "generation_mw": 10401.0,
+      "gas": 4576.0,
+      "liquid_fuel": 107.0,
+      "coal": 3677.0,
+      "hydro": 40.0,
+      "solar": 27.0,
+      "wind": 22.0,
+      "bheramara": 0.0,
+      "tripura": 902.0,
+      "adani": 90.0,
+      "nepal": 960.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T08:00:00+06:00",
+      "generation_mw": 11173.0,
+      "gas": 4592.0,
+      "liquid_fuel": 216.0,
+      "coal": 4143.0,
+      "hydro": 40.0,
+      "solar": 125.0,
+      "wind": 29.0,
+      "bheramara": 0.0,
+      "tripura": 902.0,
+      "adani": 104.0,
+      "nepal": 1022.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T09:00:00+06:00",
+      "generation_mw": 11102.0,
+      "gas": 4510.0,
+      "liquid_fuel": 263.0,
+      "coal": 4061.0,
+      "hydro": 40.0,
+      "solar": 267.0,
+      "wind": 3.0,
+      "bheramara": 0.0,
+      "tripura": 902.0,
+      "adani": 106.0,
+      "nepal": 950.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T10:00:00+06:00",
+      "generation_mw": 10979.0,
+      "gas": 4722.0,
+      "liquid_fuel": 246.0,
+      "coal": 3684.0,
+      "hydro": 40.0,
+      "solar": 392.0,
+      "wind": 0.0,
+      "bheramara": 0.0,
+      "tripura": 902.0,
+      "adani": 98.0,
+      "nepal": 895.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T11:00:00+06:00",
+      "generation_mw": 11211.0,
+      "gas": 4738.0,
+      "liquid_fuel": 214.0,
+      "coal": 3633.0,
+      "hydro": 40.0,
+      "solar": 418.0,
+      "wind": 0.0,
+      "bheramara": 228.0,
+      "tripura": 902.0,
+      "adani": 114.0,
+      "nepal": 924.0,
+      "remark": "0"
+    },
+    {
+      "datetime": "2026-11-23T12:00:00+06:00",
+      "generation_mw": 11932.0,
+      "gas": 4922.0,
+      "liquid_fuel": 276.0,
+      "coal": 3884.0,
+      "hydro": 40.0,
+      "solar": 516.0,
+      "wind": 0.0,
+      "bheramara": 234.0,
+      "tripura": 902.0,
+      "adani": 122.0,
+      "nepal": 1036.0,
+      "remark": "0"
     }
   ]
 }
